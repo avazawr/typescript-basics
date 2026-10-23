@@ -1,7 +1,10 @@
-TypeScript Basics – Challenges
+# TypeScript Basics – Challenges
 
-Dieses Repository enthält Übungsaufgaben aus dem Lernmodul „TypeScript Basics“.
+Dieses Repository enthält Übungsaufgaben aus dem Lernmodul **„TypeScript Basics“.**
 
-Challenges:
-Recipe Book
-Concert Tickets
+## Challenges:
+
+- Recipe Book
+- Concert Tickets
+- Musick Library
+- Film Watchlist
