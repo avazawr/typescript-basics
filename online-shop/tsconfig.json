@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    "target": "esnext",
+    "lib": ["esnext"],
+    "types": ["node"],
+    "module": "nodenext", // type=module in package.json
+    "verbatimModuleSyntax": true, // import type ...
+
+    "esModuleInterop": true,
+    "resolveJsonModule": true, // import data from 'users.json'
+    "sourceMap": true,
+    "skipLibCheck": true,
+
+    // coding rules
+    "strict": true,
+    // "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

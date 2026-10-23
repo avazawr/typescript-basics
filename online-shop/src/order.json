@@ -1,0 +1,42 @@
+{
+  "customerId": 13501,
+  "products": [
+    {
+      "quantity": 2,
+      "product": {
+        "id": 1,
+        "name": "Basic T-Shirt",
+        "price": 14.99,
+        "stockCount": 50,
+        "category": {
+          "name": "Clothing"
+        }
+      }
+    },
+    {
+      "quantity": 1,
+      "product": {
+        "id": 2,
+        "name": "Slim Fit Jeans",
+        "price": 49.99,
+        "stockCount": 20,
+        "category": {
+          "name": "Clothing"
+        }
+      }
+    },
+    {
+      "quantity": 1,
+      "product": {
+        "id": 3,
+        "name": "Running Sneakers",
+        "price": 79.95,
+        "stockCount": 12,
+        "category": {
+          "name": "Shoes"
+        }
+      }
+    }
+  ],
+  "status": "pending"
+}
