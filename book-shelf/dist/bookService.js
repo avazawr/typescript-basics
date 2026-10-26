@@ -54,4 +54,7 @@ export async function updateBook(_id, changes) {
         data: book,
     };
 }
+export function parseIsbn(_isbn) {
+    return [1, "", ""];
+}
 //# sourceMappingURL=bookService.js.map
