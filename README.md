@@ -6,5 +6,6 @@ Dieses Repository enthält Übungsaufgaben aus dem Lernmodul **„TypeScript Bas
 
 - Recipe Book
 - Concert Tickets
-- Musick Library
 - Film Watchlist
+- Online Shop
+- Musick Library

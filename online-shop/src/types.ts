@@ -17,7 +17,7 @@ export interface Customer {
   email: string;
 }
 
-export type Status = "pending" | "confirmed" | "shipped";
+type Status = "pending" | "confirmed" | "shipped";
 
 export interface LineProduct {
   quantity: number;
