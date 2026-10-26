@@ -9,3 +9,4 @@ Dieses Repository enthält Übungsaufgaben aus dem Lernmodul **„TypeScript Bas
 - Film Watchlist
 - Online Shop
 - Musick Library
+- Book Shelf
