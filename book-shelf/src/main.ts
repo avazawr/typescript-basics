@@ -1,6 +1,12 @@
-import type { Book, BookCreatePayload, BookUpdatePayload } from "./types.js";
+import type {
+  Book,
+  BookCreatePayload,
+  BookUpdatePayload,
+  EntityId,
+} from "./types.js";
 import { createBook, updateBook } from "./bookService.js";
 import { groupBy, pluck, merge } from "./generic.js";
+import type { MyPartial, MyReadonly, MyPick } from "./generic.js";
 
 const b1: BookCreatePayload = {
   title: "Der Hobbit",
@@ -64,3 +70,41 @@ let ub: BookUpdatePayload = {
 };
 
 console.log(merge(books[1], ub));
+
+type PartialBook = MyPartial<Book>;
+type ReadonlyBook = MyReadonly<Book>;
+type PickBook = MyPick<Book, "title" | "author">;
+
+type BookUpdatePayload2 = MyPartial<
+  MyPick<Book, "title" | "author" | "isbn" | "isAvailable">
+>;
+
+type BookPreview2 = MyPick<Book, "id" | "title" | "author">;
+
+//type B = Pick<Book, "Id">;
+
+type BookEvents = {
+  bookAdded: Book;
+  bookRemoved: { id: EntityId };
+  searchPerformed: { query: string; resultCount: number };
+};
+
+// Type-safe event emitter
+function createEmitter<Events>() {
+  const handlers: {
+    [K in keyof Events]?: ((payload: Events[K]) => void)[];
+  } = {};
+  return {
+    on<K extends keyof Events>(
+      event: K,
+      handler: (payload: Events[K]) => void,
+    ): void {
+      //
+    },
+    emit<K extends keyof Events>(event: K, payload: Events[K]): void {
+      //
+    },
+  };
+}
+
+const emitter = createEmitter<BookEvents>();

@@ -33,3 +33,15 @@ export function merge<T>(base: T, updates: Partial<T>): T {
     ...updates,
   };
 }
+
+export type MyPartial<T> = {
+  [K in keyof T]?: T[K];
+};
+
+export type MyReadonly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+export type MyPick<T, K extends keyof T> = {
+  [newK in K]: T[newK];
+};
