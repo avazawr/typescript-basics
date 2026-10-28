@@ -143,16 +143,105 @@ interface Todo {
   done: boolean;
 }
 
-const todos: Todo[] = [];
+function isTodo(value: unknown): value is Todo {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "id" in value &&
+    typeof value.id === "number" &&
+    "text" in value &&
+    typeof value.text === "string" &&
+    "done" in value &&
+    typeof value.done === "boolean"
+  );
+}
 
-function renderTodo(todos: Todo[]): void {
+function loadTodos(): Todo[] {
+  const todosStorage: unknown = localStorage.getItem("todos") ?? "[]";
+
+  if (typeof todosStorage !== "string") {
+    return [];
+  }
+
+  const todosParsed = JSON.parse(todosStorage);
+  return todosParsed.filter(isTodo);
+}
+
+function saveTodos(todos: Todo[]): void {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+const renderTodos = (items: Todo[]): void => {
   todoList.replaceChildren(
-    ...todos.map((todo) => {
+    ...items.map((todo) => {
       const item = document.createElement("li");
-      const title = document.createElement("b");
-      title.textContent = todo.text;
-      item.append(title, ` `);
+      item.dataset.id = String(todo.id);
+      if (todo.done) {
+        item.classList.add("done");
+      }
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = todo.done;
+
+      const label = document.createElement("span");
+      label.textContent = todo.text;
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.dataset.action = "delete";
+      remove.textContent = "Delete";
+
+      item.append(checkbox, " ", label, " ", remove);
       return item;
     }),
   );
-}
+};
+
+addTodo.addEventListener("click", (event) => {
+  const text = todoInput.value;
+  if (text) {
+    let newId = 0;
+
+    if (todos.length > 0) {
+      newId = todos[todos.length - 1].id + 1;
+    }
+
+    const newTodo: Todo = {
+      id: newId,
+      text: text,
+      done: false,
+    };
+    todos.push(newTodo);
+    saveTodos(todos);
+    renderTodos(todos);
+  }
+});
+
+todoList.addEventListener("click", (event) => {
+  if (
+    event.target instanceof HTMLButtonElement ||
+    event.target instanceof HTMLInputElement
+  ) {
+    const item = event.target.closest("li");
+    const id = Number(item?.dataset.id);
+    const index = todos.findIndex((todo) => todo.id === id);
+
+    if (event.target instanceof HTMLButtonElement) {
+      if (index !== -1) {
+        todos.splice(index, 1);
+      }
+    }
+
+    if (event.target instanceof HTMLInputElement) {
+      if (index !== -1) {
+        todos[index].done = !todos[index].done;
+      }
+    }
+    saveTodos(todos);
+    renderTodos(todos);
+  }
+});
+
+const todos: Todo[] = loadTodos();
+renderTodos(todos);
